@@ -11917,7 +11917,7 @@ MonoBehaviour:
   GroundedRadius: 0.5
   GroundLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4294967295
   mainCamera: {fileID: 590339536}
 --- !u!143 &1875244144
 CharacterController:
