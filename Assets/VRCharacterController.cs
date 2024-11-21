@@ -1,8 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.UIElements;
 
+[RequireComponent(typeof(CharacterController))]
 public class VRCharacterController : MonoBehaviour
 {
    [Header("Player")]
@@ -83,14 +86,27 @@ public class VRCharacterController : MonoBehaviour
 			JumpAndGravity();
 			GroundedCheck();
 			Move();
+			
 		}
-		
+
+		private void LateUpdate()
+		{
+			Rotate();
+		}
+
 
 		private void GroundedCheck()
 		{
 			// set sphere position, with offset
 			Vector3 spherePosition = new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z);
 			Grounded = Physics.CheckSphere(spherePosition, GroundedRadius, GroundLayers, QueryTriggerInteraction.Ignore);
+		}
+
+		void Rotate()
+		{
+			Vector2 rotationInput = _input.look;
+			
+			transform.Rotate(Vector3.up * (rotationInput.x * RotationSpeed));
 		}
 		
 
